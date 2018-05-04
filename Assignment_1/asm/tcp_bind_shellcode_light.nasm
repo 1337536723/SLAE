@@ -75,14 +75,11 @@ _start:
 	xor eax, eax
 	mov ax, 0x16c		; 364 in decimal
 
-	xor edx, edx 		; I set edx to 0 since I need it for last 2 args
-	push edx		; struct sockaddr *
-	push edx		; socklen_t addlen
-	push edx		; int flags
+	push ecx		; ECX is 0, pushing on the stack
 
+	mov esi, ecx
 	mov ecx, esp		; ECX now points to a zero bytes region from the stack.
-	mov esi, edx
-	mov edx, ecx
+	mov edx, esp
 
 	int 0x80		; cfd = accept4(sfd, NULL, NULL, 0);
 

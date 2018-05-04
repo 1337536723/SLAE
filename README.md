@@ -5,7 +5,7 @@
 This is the repository for my exam assignments at the end of the journey for
 SLAE32 certification path.
 
-My student id is: SLAE-xxxx
+My student id is: SLAE-1217
 
 The repository is made of a bunche of directories:
 

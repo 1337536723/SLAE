@@ -4,7 +4,9 @@ dirname=$(dirname -- "$1")
 filename=$(basename -- "$1")
 extension="${filename##*.}"
 filename="${filename%.*}"
+
 OBJDUMP=`which objdump`
+
 
 if ! [ -x $OBJDUMP ]; then
 	echo "[!] there is no objdump installed on the system. I can't continue."

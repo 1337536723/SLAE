@@ -28,6 +28,6 @@ However, this is far out of scope of this assignement.
   the POCs to build the assembler file
 * ```asm``` directory is for bind shellcode assembler implementations
 * shellcode.c is the file responsible to launch shellcode extracted from assembly files
-* v_1.py is a python configurator for the shellcode. It is used to choose the
+* venom_a1.py is a python configurator for the shellcode. It is used to choose the
   binding port and if you want the code for _light_ version or the _resident_ one.
 
