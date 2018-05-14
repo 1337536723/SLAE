@@ -1,10 +1,10 @@
-# Assignment 1: A TCP Bind shellcode
+# Assignment 2: A TCP Reverse shell shellcode
 
-The first assignment asks to create a TCP Bind shellcode that:
-* binds on a specific TCP port
-* run a shell on incoming connection
+The second assignment asks to create a TCP reverse shell shellcode that:
+* reverse connects on a specified IP and PORT
+* execs a shell on successfull connection
 
-The TCP port must be easily configurable.
+The IP address TCP port must be easily configurable.
 
 Syscall numbers are taken from /usr/include/i386-linux-gnu/asm/unistd_32.h
 

