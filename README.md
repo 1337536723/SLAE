@@ -7,7 +7,7 @@ SLAE32 certification path.
 
 My student id is: SLAE-1217
 
-The repository is made of a bunche of directories:
+The repository is made of a bunch of sub-directories:
 
 * Assignment\_[1-7]: the directory with full assignment solution;
 * bin: some binary helpers

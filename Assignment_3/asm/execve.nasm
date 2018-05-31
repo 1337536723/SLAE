@@ -9,6 +9,9 @@
 
 global _start			
 
+dd 0xdeadbeef
+dd 0xdeadbeef
+
 section .text
 
 _start:
