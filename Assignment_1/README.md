@@ -21,3 +21,7 @@ listening deamon dies as expected.
 * venom_a1.py is a python configurator for the shellcode. It is used to choose the
   binding port
 
+## On the internet
+ 
+[Post on CodiceInsicuro](https://codiceinsicuro.it/slae/assignment-1-create-a-bind-shellcode/)
+[Shellcode on Exploit-DB](https://www.exploit-db.com/exploits/44808/)

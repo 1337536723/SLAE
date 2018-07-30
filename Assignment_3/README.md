@@ -75,3 +75,6 @@ section, threating it as it would not make sens in assembler.
 https://www.corelan.be/index.php/2011/01/09/exploit-writing-tutorial-part-8-win32-egg-hunting/
 https://www.exploit-db.com/exploits/17559/
 
+[Post on CodiceInsicuro](https://codiceinsicuro.it/slae/assignment-3-an-egg-hunter-journey/)
+[Post on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:6407580755962191872)
+[Shellcode on Exploit-DB](https://www.exploit-db.com/exploits/44807/)
