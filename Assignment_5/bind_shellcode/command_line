@@ -1,0 +1,1 @@
+msfvenom -p linux/x86/shell_bind_tcp -a x86 --platform linux -f raw | ndisasm -u - > bind_tcp.ndisasm
