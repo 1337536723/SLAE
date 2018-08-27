@@ -355,7 +355,7 @@ Please note that we first invoke the CL set and then AL value.
 shellcode="\\x31\\xc0\\x31\\xdb\\x31\\xc9"+kill_div_for_mov(9, True)+kill_div_for_mov(37, False)+"\\x4b\\xcd\\x80";
 {%endhighlight%}
 
-{%asciirecord xxXXX%}
+{%asciicast 198421 %}
 
 ### The polymorphic generator for kill(-9, -1)
 
@@ -836,7 +836,7 @@ def exec_nop_dope():
 
 {%endhighlight%}
 
-{%asciirecord exec_adding_nop.cast%}
+{%asciirecord 197548 %}
 
 ### Even more wasted CPU time
 
