@@ -189,7 +189,7 @@ def kill_shuffle():
 As you can see in the following picture, some polymorphic variant of the
 original shellcode can be easily generated, without penalty on lenght:
 
-![Kill Swap variations](kill_swap_variations.png)
+![Kill Swap variations]({{site.url}}/assets/images/kill_swap_variations.png)
 
 ### NOP dope
 
@@ -213,7 +213,7 @@ def kill_nop_dope():
 
 {%endhighlight%}
 
-![Kill NOP variations](kill_nop_variations.png)
+![Kill NOP variations]({{site.url}}/assets/images/kill_nop_variations.png)
 
 ### Some quick improvements
 
@@ -346,7 +346,7 @@ def kill_div_for_mov(n, mov_to_cl=False):
 
 {%endhighlight%}
 
-![Kill with math](kill_math.png)
+![Kill with math]({{site.url}}/assets/images/kill_math.png)
 
 This line will create the _kill them all_ shellcode with the div strategy.
 Please note that we first invoke the CL set and then AL value.
@@ -558,7 +558,7 @@ shellcode, there is a JUMP on a CALL instruction that set the EIP to a pop
 $esi, since in that register it will be stored the memory address of the
 executable to be called, "/bin/sh" that seems to be obfuscated, this way.
 
-{%asciinema exec_original_gdb.cast%}
+{%asciicast 198401%}
 
 ### First variation
 
@@ -609,7 +609,7 @@ were assembly opcodes.
 	jae $+0x6a
 {%endhighlight%}
 
-![The encoded payload](exec_encoded_variant.png)
+![The encoded payload]({{site.url}}/assets/images/exec_encoded_variant.png)
 
 The execve() shellcode variant is 25 byte long, instead of 30 bytes of the
 original shellcode taken from the website.
@@ -708,7 +708,7 @@ def exec_shuffle():
     return "".join(init_blk)+"\\x58\\xeb\\x03\\x5b\\xcd\\x80\\xe8\\xf8\\xff\\xff\\xff\\x2f\\x62\\x69\\x6e\\x2f\\x2f\\x73\\x68";
 {%endhighlight%}
 (
-![Exec polymorphic shellcodes using opcode shuffle](exec_shuffle.png)
+![Exec polymorphic shellcodes using opcode shuffle]({{site.url}}/assets/images/exec_shuffle.png)
 
 The other shellcode sections can't be shuffled, so this is not a wise strategy
 to create different polymorphic version of our obfuscated execve shellcode.
@@ -765,7 +765,7 @@ After generated a shellcode and tried with my C skeleton program, no shell
 popped out.
 Lucky enough we've got GDB in help to understand why.
 
-![A mess to deal with jump and code injection](exec_jumps_dont_nop.png)
+![A mess to deal with jump and code injection]({{site.url}}/assets/images/exec_jumps_dont_nop.png)
 
 As you can see from the picture, the NOPs we inserted they break our jump and
 call offsets. In particular, the "\xeb\x03| opcode, make a 3 byte relative jump
@@ -776,7 +776,7 @@ expected.
 Now that the jump works as expected, our shellcode still goes in an infinite
 loop.
 
-![Another infinite loop](exec_nop_loop.png)
+![Another infinite loop]({{site.url}}/assets/images/exec_nop_loop.png)
 
 After a GDB session, that turns to be my best friend in those latest days, it
 turns that I made a big logical mistake. The "\x5b" instruction, pop $ebx, must
@@ -836,7 +836,7 @@ def exec_nop_dope():
 
 {%endhighlight%}
 
-{%asciirecord 197548 %}
+{%asciicast 197548 %}
 
 ### Even more wasted CPU time
 
@@ -935,7 +935,7 @@ def kill_nop_super_dope():
 No black magic here. It's the same approach used with NOPs but with some more
 instructions having no effect on the program logical flow.
 
-{% asciirecord exec_nop_equivalent.cast %}
+{% asciicast 198400 %}
 
 ### Do some math
 
@@ -1005,7 +1005,7 @@ def exec_sub_strategy():
 
 {%endhighlight%}
 
-{%asciirecord exec_use_math.cast%}
+{%asciicast  198404 %}
 
 ## Fork bomb
 
@@ -1017,7 +1017,7 @@ The original shellcode it can be found here:
 The code is very easy. The fork() system call has no parameter and its listed
 with number 2 in the system call list.
 
-![Fork system call number](fork_number.png)
+![Fork system call number]({{site.url}}/assets/images/fork_number.png)
 
 {%highlight asm%}
 section .text
@@ -1072,7 +1072,7 @@ Disassembly of section .text:
  8048086:	eb f8                	jmp    8048080 <_start>
 {%endhighlight%}
 
-{%asciirecord forkbomb_variant.cast%}
+{%asciicast 198406 %}
 
 Now, let's create our polymorphic generator script for fork bombing shellcode.
 
@@ -1081,7 +1081,7 @@ Now, let's create our polymorphic generator script for fork bombing shellcode.
 Unfortunately, the shellcode is too short to shuffle operands. So this strategy
 doesn't work this time.
 
-![Can't shuffle this time](fork_no_shuffle.png)
+![Can't shuffle this time]({{site.url}}/assets/images/fork_no_shuffle.png)
 
 ### Add some NOPs
 
@@ -1253,7 +1253,7 @@ def fork_sub_strategy():
     return shellcode
 {%endhighlight%}
 
-{%asciirecord fork_math.cast%}
+{%asciicast 198409 %}
 
 ## Lessons learnt
 
@@ -1263,4 +1263,4 @@ shellcodes requires a lot of attentions in not mangling program logic flow.
 
 Another important thing I learnt in this assignment is that, GDB is one of my
 best friends and the .gdbinit file with the hook-stop function is one of the
-customization you have to care most of it.
+customization you have to care most of it.most of it.
