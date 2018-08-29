@@ -1,9 +1,11 @@
-#SecurityTube Linux Assembly Expert exam
+# SecurityTube Linux Assembly Expert exam
 
 ## Introduction
 
+![SLAE](./slae.png)
+
 This is the repository for my exam assignments at the end of the journey for
-SLAE32 certification path.
+[SLAE32](http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/index.html) certification path.
 
 My student id is: SLAE-1217
 
