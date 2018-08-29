@@ -58,7 +58,7 @@ def port_to_hex(port):
     return "\\x%s\\x%s" % (h2, h1)
 
 if (len(sys.argv) != 3):
-    print ("usage: " + argv[0] + " ip port");
+    print ("usage: " + sys.argv[0] + " ip port");
     sys.exit(-1);
 
 

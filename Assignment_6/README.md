@@ -1264,3 +1264,8 @@ shellcodes requires a lot of attentions in not mangling program logic flow.
 Another important thing I learnt in this assignment is that, GDB is one of my
 best friends and the .gdbinit file with the hook-stop function is one of the
 customization you have to care most of it.most of it.
+
+## Social part
+
+LinkedIN post: https://www.linkedin.com/feed/update/urn:li:activity:6439845187354140672
+Facebook: https://www.facebook.com/codiceinsicuro/posts/894119680798959
