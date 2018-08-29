@@ -710,5 +710,5 @@ Student ID: SLAE-1217
 
 ## On the internet
  
-[Post on CodiceInsicuro](https://codiceinsicuro.it/slae/assignment-1-create-a-bind-shellcode/)
-[Shellcode on Exploit-DB](https://www.exploit-db.com/exploits/44808/)
+* [Post on CodiceInsicuro](https://codiceinsicuro.it/slae/assignment-1-create-a-bind-shellcode/)
+* [Shellcode on Exploit-DB](https://www.exploit-db.com/exploits/44808/)
