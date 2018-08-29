@@ -1,12 +1,5 @@
 # Assignment 1: A TCP Bind shellcode
 
----
-title: "Assignment #1: Create a bind shellcode"
-tags: [slae, shellcode, bind shellcode, assembler, i386]
-comments: true
-share: true
-order: 1
----
 
 The first assignment for SLAE certification is to create a standard shell TCP
 bind shellcode in assembler language. The shellcode will bind on a given port,
