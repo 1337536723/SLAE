@@ -590,6 +590,6 @@ Student ID: SLAE-1217
 ## On the internet
 
 * [Post on CodiceInsicuro](https://codiceinsicuro.it/slae/assignment-2-create-a-reverse-shellcode/)
-* [Post on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:6401696075035533312/?commentUrn=urn%3Ali%3Acomment%3A(activity%3A6401696075035533312%2C6401803593376108544)&replyUrn=urn%3Ali%3Acomment%3A(activity%3A6401696075035533312%2C6403146077029171200))
+* [Post on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:640169607503553331)
 * [Shellcode on Exploit-DB](https://www.exploit-db.com/exploits/44620/)
 

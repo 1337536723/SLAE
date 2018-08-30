@@ -1,8 +1,11 @@
-# Assignment 7
+# Assignment 7: Create a custom crypter
 
 The seventh and last assignment is to create a custom crypter like the one
 shown in the "crypters" video. I'm free to use any existing encryption schema
 and I can use any programming language.
+
+The assignment was written on an Ubuntu Linux 18.04, with a Linux kernel 4.15
+version.
 
 ## Choosing the encryption scheme
 
@@ -28,7 +31,7 @@ following command:
 
 The default behaviour is to select a 16 bytes long random key and use xxtea library facilities to encrypt the default shellcode that is the standard execve() shellcode used in assignment 4.
 
-{% highlight asm %}
+``` asm 
 
 ; Filename: 	execve.nasm
 ; Author:	Paolo Perego <paolo@codiceinsicuro.it>  
@@ -72,16 +75,14 @@ _start:
 	mov al, 0xb		; execve = 11
 	int 0x80
 
-{% endhighligh %}
+``` 
 
 However, the crypter tool accepts also a custom encryption key and a custom
 shellcode to be used instead of the default one.
 
-{% asciicast 198703 %}
-
 Here you can find the source code for the crypter script:
 
-{% highlight python %}
+``` python 
 
 #!/usr/bin/env python
 
@@ -139,7 +140,7 @@ if __name__ == "__main__":
     main(sys.argv[1:])
 
 
-{% endhighligh %}
+``` 
 
 ## Decrypt and launch
 
@@ -148,7 +149,7 @@ decryption key. It may be redundant to recall but, since XXTEA is a Symmetric
 Cryptography algorithm, the decryption key is the one used to crypt the
 shellcode.
 
-{% highlight python %}
+``` python 
 
 #!/usr/bin/env python
 # Got rid of SEGFAULT using the solution provider here:
@@ -230,13 +231,23 @@ def main(argv):
     
 if __name__ == "__main__":
     main(sys.argv[1:])
-{% endhighligh %}
+``` 
 
 Launching the shellcode is **really** hard stuff. I've to fight against tons of
 SEGFAULTS and this post saved me in getting rid of non executable bit
 protection for memory regions:
 [https://stackoverflow.com/questions/19326409/python-ctype-segmentation-fault](https://stackoverflow.com/questions/19326409/python-ctype-segmentation-fault).
 
-See it in action:
 
-{% asciicast 198715 %}
+## SLAE Exam Statement
+
+This blog post has been created for completing the requirements of the SecurityTube Linux Assembly Expert certification:
+
+[http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/](http://securitytube-training.com/online-courses/securitytube-linux-assembly-expert/)
+
+Student ID: SLAE-1217
+
+## On the Internet
+
+* [Post on CodiceInsicuro](https://codiceinsicuro.it/slae/assignment-7-create-a-custom-crypter/)
+* [Post on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:6440516750491549696)
