@@ -333,7 +333,7 @@ the
 As you may see, only 6 antivirus out of 59 detects the weaponized code as
 malicious.
 
-![Virus Total]({{site.url}}/assets/images/slae_encoding_comparison.png)
+![Virus Total](./slae_encoding_comparison.png)
 
 ## SLAE Exam Statement
 
