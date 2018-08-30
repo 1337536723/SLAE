@@ -567,7 +567,6 @@ int main(int argc, char **argv)
 	ret();
 }
 ```
-{% endhighlight %}
 
 As you can see from the video, after compiling the C code, disabling stack
 protection and run it.

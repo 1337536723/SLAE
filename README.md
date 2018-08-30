@@ -21,6 +21,11 @@ This repository content:
 * bin: binary helpers to compile C and assembler and to extract shellcode from binary file
 * templates: templates for C and assembler files
 
+Every assignment directory contains a README file with the solution
+implementation details, however please consider the post on the [SLAE
+section](https://codiceinsicuro.it/slae) with also images and video of
+implementation in action.
+
 ## About me
 
 OSCP guy. I break code and rebuild safetly, taekwon-do itf athlete, husband and
